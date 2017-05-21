@@ -12,13 +12,18 @@ use self::tokio_core::reactor::Core;
 use std::{thread,time};
 
 
-fn run_server() {
+
+static SERVER_ADDRESS: &'static str = "127.0.0.1:12345";
+
+
+
+pub fn run_server() {
     // Create the event loop that will drive this server
     let mut core = Core::new().unwrap();
     let handle = core.handle();
 
     // Bind the server's socket
-    let addr = "127.0.0.1:12345".parse().unwrap();
+    let addr = SERVER_ADDRESS.parse().unwrap();
     let tcp = TcpListener::bind(&addr, &handle).unwrap();
 
     // Iterate incoming connections
@@ -49,6 +54,7 @@ fn run_server() {
 
 
 #[test]
+#[ignore]
 fn test_run_server() {
     thread::spawn(|| { run_server(); });
     thread::sleep(time::Duration::from_millis(3000));
