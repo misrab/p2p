@@ -9,7 +9,7 @@ use self::tokio_core::net::TcpListener;
 use self::tokio_core::reactor::Core;
 
 
-use std::thread;
+use std::{thread,time};
 
 
 fn run_server() {
@@ -51,5 +51,5 @@ fn run_server() {
 #[test]
 fn test_run_server() {
     thread::spawn(|| { run_server(); });
-    thread::sleep(3);
+    thread::sleep(time::Duration::from_millis(3000));
 }
