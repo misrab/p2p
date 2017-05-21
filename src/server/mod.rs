@@ -51,4 +51,5 @@ fn run_server() {
 #[test]
 fn test_run_server() {
     thread::spawn(|| { run_server(); });
+    thread::sleep(3);
 }
